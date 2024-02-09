@@ -1,12 +1,13 @@
-import { useState } from "react";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Home from "./pages/Home";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>Home Page</div>
+      Nav Bar
+      <Home />
     </>
   );
 }
