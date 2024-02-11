@@ -1,8 +1,6 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsPerson } from "react-icons/bs";
 
@@ -21,19 +19,17 @@ export default function HeaderSection() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-        <Navbar>
-          <Nav >
-            <Nav.Link href="#home" style={{ color: 'green',marginRight: '40px'}}>Home</Nav.Link>
-            <Nav.Link href="" style={{ color: 'black',marginRight: '40px'  }}>Orders</Nav.Link>
-            <Nav.Link href="" style={{ color: 'black',marginRight: '40px' }}>Order Links</Nav.Link>
-            <Nav.Link href="" style={{ color: 'black' ,marginRight: '40px'}}>Reports</Nav.Link>
-            <Nav.Link href="" style={{ color: 'black' ,marginRight: '40px'}}>Contact Us</Nav.Link>
+          <Nav>
+            <Nav.Link href="#home" style={{ color: 'green', marginRight: '40px'}}>Home</Nav.Link>
+            <Nav.Link href="" style={{ color: 'black', marginRight: '40px'  }}>Orders</Nav.Link>
+            <Nav.Link href="" style={{ color: 'black', marginRight: '40px' }}>Order Links</Nav.Link>
+            <Nav.Link href="" style={{ color: 'black' , marginRight: '40px'}}>Reports</Nav.Link>
+            <Nav.Link href="" style={{ color: 'black' , marginRight: '40px'}}>Contact Us</Nav.Link>
           </Nav>
-        </Navbar>
-        <Navbar.Brand style={{ marginLeft: '370px'}}>
-        <IoMdNotificationsOutline className="icon" style={{ marginLeft: '20px'}}/>{" | "}
-            <BsPerson className="icon"  />
-        </Navbar.Brand>
+          <Navbar.Text>
+            <IoMdNotificationsOutline className="icon" style={{ marginRight: '10px'}}/>{' | '}
+            <BsPerson className="icon" />
+          </Navbar.Text>
         </Navbar.Collapse>
     </Navbar>
     </>
