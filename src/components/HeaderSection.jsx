@@ -7,15 +7,15 @@ import { HiMiniBars3 } from "react-icons/hi2";
 import { IoCloseSharp } from "react-icons/io5";
 import './HeaderSection.css';
 
-export default function HeaderSection() {
-    const [isOpen, setIsOpen] = useState(false);
+function HeaderSection() {
+  const [isOpen, setIsOpen] = useState(false);
 
-    const toggleMenu = () => {
-      setIsOpen(!isOpen);
-    };
+  const toggleMenu = () => {
+        setIsOpen(!isOpen);
+      };
 
-    return (
-      <Navbar id="navbar" expand="lg" 
+  return (
+    <Navbar id="navbar" expand="lg" 
       style={{ backgroundColor: '#BABBBA', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px' }}>
         <Navbar.Brand>
           <img
@@ -35,7 +35,7 @@ export default function HeaderSection() {
           <Nav.Link href="" style={{ color: 'black', marginLeft: '40px' }}>Reports</Nav.Link>
           <Nav.Link href="" style={{ color: 'black', marginLeft: '40px' }}>Contact Us</Nav.Link>
         </Nav>
-
+        
         <Nav style={{ display: 'flex', alignItems: 'center' }}>
           <IoMdNotificationsOutline className="icon" />
           <BsPerson className="icon" />
@@ -46,8 +46,10 @@ export default function HeaderSection() {
               <HiMiniBars3 className="icon" onClick={toggleMenu} />
             )}
           </div>
-        
+
         </Nav>
       </Navbar>
-    )
-  }
+  )
+}
+
+export default HeaderSection
