@@ -1,5 +1,7 @@
 import React from "react";
 import HeaderSection from "./components/HeaderSection";
+import Navbar from "./components/Navbar";
+
 
 
 function App() {
@@ -7,7 +9,7 @@ function App() {
 
   return (
     <>
-    <HeaderSection/>
+    <HeaderSection />
     </>
   );
 }
