@@ -41,7 +41,7 @@ function Product() {
     </div>
     </div>
    
-    <div className="row mt-5">
+    <div className="row mt-2">
         <div className="col-5">
     <Card className="container-fluid col-lg-9 ms-15 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0' }}>
       <Card.Body>
@@ -59,7 +59,7 @@ function Product() {
     </div>
 
     <div className="col-2">
-        <button type="button" class="btn btn-success rounded-pill border btn-lg ps-5  pe-5 pt-1 pb-1">Add Item</button>
+    <button type="button" class="btn btn-success rounded-pill border btn-lg ps-5  pe-5 pt-1 pb-1">Add Item</button>
     </div>
 
     <div className="col-5">
@@ -79,7 +79,7 @@ function Product() {
     </div>
     </div>
 
-    <div className="row mt-5">
+    <div className="row mt-2">
         <div className="col-5">
     <Card className="container-fluid col-lg-9 ms-15 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0' }}>
       <Card.Body>
@@ -96,7 +96,8 @@ function Product() {
     </Card>
     </div>
 
-    <div className="col-2"></div>
+    <div className="col-2">
+    </div>
     
     <div className="col-5">
     <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0'}}>
