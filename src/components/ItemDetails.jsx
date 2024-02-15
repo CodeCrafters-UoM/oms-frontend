@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Col from 'react-bootstrap/Col';
 
 
 function ItemDetails() {
@@ -71,16 +70,26 @@ function ItemDetails() {
               />
             </Form.Group>
             
-          </Form>
-        </Modal.Body>
-        <Modal.Body>
-          <Button type="submit" className=" mt-15 ps-5 pe-5 pt-2 pb-10 rounded-pill border position-absolute bottom-0 start-50 translate-middle-x" variant="success" onClick={handleClose}>
-            Add
-          </Button>
-        </Modal.Body>
-        <Modal.Body>
-          
-        </Modal.Body>
+            </Form>
+            </Modal.Body>
+            <Modal.Body>
+            <Modal.Body>
+            <div className="row justify-content-center">
+            <div className="col-4">
+            <Button type="submit" className="mt-15 ps-5 pe-5 pt-2 pb-10 rounded-pill border" variant="success" onClick={handleClose}>
+                Remove
+            </Button>
+            </div>
+            <div className="col-1"></div> {/* Add an empty column for the gap */}
+            <div className="col-4">
+            <Button type="submit" className="mt-15 ps-5 pe-5 pt-2 pb-10 rounded-pill border" variant="success" onClick={handleClose}>
+                Update
+            </Button>
+            </div>
+            </div>
+            </Modal.Body>
+            </Modal.Body>
+           
       </Modal>
 
   
