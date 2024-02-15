@@ -13,17 +13,22 @@ function Product() {
 
     <div className="container">
     <div className="row border-bottom border-muted mt-5">
-        <div className="col-lg-6 ">
+
+        <div className="col-lg-6">
             <h6 className="display-6 fw-bold"> Product List</h6>
     </div>
     
-    <div className="col-lg-3 mt-3 ">
-    <div className="input-wrapper">
-    <input type="text" placeholder="Search" className="search " />
-    <FiSearch id="search-icon"/>
-    </div>
-    </div>
-
+      <div className="col-lg-6 ">
+      <div className=" input-group ">
+        <div className="input-group-prepend">
+        <input type="text" class="form-control bg-secondary" id="inlineFormInputGroupUsername2" placeholder="Search"/>
+        </div>
+        <div className="input-group-text bg-secondary">
+        <FiSearch id="search-icon"/>
+        </div>
+      </div>
+      </div>
+     
     </div>
     </div>
    
