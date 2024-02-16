@@ -1,13 +1,17 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import Home from "./pages/Home";
+
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/routes";
+import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
+
 
 function App() {
   return (
     <>
-      Nav Bar
-      <Home />
+
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </>
   );
 }
