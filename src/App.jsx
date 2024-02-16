@@ -1,6 +1,6 @@
 import React from "react";
-//import HeaderSection from "./components/HeaderSection";
-import Header from "./components/Header";
+import HeaderSection from "./components/HeaderSection";
+
 
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-    <Header />
+    <HeaderSection />
     </>
   );
 }
