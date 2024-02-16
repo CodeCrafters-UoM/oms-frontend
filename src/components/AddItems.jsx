@@ -10,21 +10,19 @@ import Col from 'react-bootstrap/Col';
 
 function AddItems() {
     const [show, setShow] = useState(false);
+    const [validated, setValidated] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-  const [validated, setValidated] = useState(false);
-
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
-  };
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        setValidated(true);
+    };
 
   return (
     <>
@@ -43,55 +41,57 @@ function AddItems() {
               <Form.Control
                 required
                 type="text"
-                placeholder="product name"
+                placeholder="product code"
                 defaultValue="F001"
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group controlId="validationCustom02" className="mb-3 ms-3 me-3 ">
-              <Form.Label>Product Name</Form.Label>
-              <Form.Control
-              required
-              type="text"
-              placeholder="Product name"
-            
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          </Form.Group>
-            <Form.Group className="mb-3 ms-3 me-3" controlId="Form.ControlInput1">
-              <Form.Label>Product Price</Form.Label>
-              <Form.Control
-              required
-              type="text"
-              placeholder="Product price"
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group
-              className="mb-3 ms-3 me-3"
-              controlId="Form.ControlTextarea1"
-            >
-              <Form.Label>Product description</Form.Label>
-              <Form.Control as="textarea" rows={3} />
-            </Form.Group>
-            <Form.Group className="mb-3 ms-3 me-3" controlId="Form.ControlInput1">
-              <Form.Label>Order Link</Form.Label>
-              <Form.Control
+              </Form.Group>
+              <Form.Group controlId="validationCustom02" className="mb-3 ms-3 me-3 ">
+                <Form.Label>Product Name</Form.Label>
+                <Form.Control
+                required
                 type="text"
-                autoFocus
+                placeholder="Product name"
+                defaultValue="Cozy Cable Knit Sweater"
+              
+            />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+                <Form.Group className="mb-3 ms-3 me-3" controlId="Form.ControlInput1">
+                  <Form.Label>Product Price</Form.Label>
+                  <Form.Control
+                  required
+                  type="text"
+                  placeholder="Product price"
+                  defaultValue="1450.00 LKR"
               />
-            </Form.Group>
-            
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group
+                  className="mb-3 ms-3 me-3"
+                  controlId="Form.ControlTextarea1"
+                >
+                  <Form.Label>Product description</Form.Label>
+                  <Form.Control as="textarea" rows={3} />
+                </Form.Group>
+              <Form.Group className="mb-3 ms-3 me-3" controlId="Form.ControlInput1">
+                <Form.Label>Order Link</Form.Label>
+                <Form.Control
+                  type="text"
+                  autoFocus
+                />
+              </Form.Group>
+            <Modal.Body>
+
+            </Modal.Body>
+            <Button type="submit" className=" mt-15 ps-5 pe-5 pt-2 pb-10 rounded-pill border position-absolute bottom-0 start-50 translate-middle-x" variant="success" onClick={handleClose}>
+              Add
+            </Button>
           </Form>
         </Modal.Body>
-        <Modal.Body>
-          <Button type="submit" className=" mt-15 ps-5 pe-5 pt-2 pb-10 rounded-pill border position-absolute bottom-0 start-50 translate-middle-x" variant="success" onClick={handleClose}>
-            Add
-          </Button>
-        </Modal.Body>
-        <Modal.Body>
-          
-        </Modal.Body>
+          <Modal.Body>
+
+          </Modal.Body>
       </Modal>
     </>
   )
