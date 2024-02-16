@@ -25,6 +25,8 @@ function AppRoutes() {
         <Route path="orderlinks" element={<OrderLinks />} />
         <Route path="contactus" element={<ContactUs />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="login/signup" element={<SignUp />}></Route>
+        <Route path="login/forgotpassword" element={<ForgotPassword />}></Route>
       </Routes>
     </>
   );
