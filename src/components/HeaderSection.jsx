@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsPerson } from "react-icons/bs";
@@ -86,4 +87,4 @@ function Header() {
   )
 }
 
-export default Header
+export default Header;
