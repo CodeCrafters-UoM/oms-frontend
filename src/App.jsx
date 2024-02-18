@@ -1,13 +1,14 @@
-import "./App.css";
-import FooterSection from "./Components/FooterSection";
-//import Footer from "./Components/Footer";
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/routes";
+import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
- 
-
   return (
     <>
-      <FooterSection/>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </>
   );
 }
