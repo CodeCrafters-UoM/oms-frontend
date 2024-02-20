@@ -6,7 +6,6 @@ import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <>
-      <ItemDetails />
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
