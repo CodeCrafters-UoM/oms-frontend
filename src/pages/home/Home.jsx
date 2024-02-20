@@ -3,9 +3,11 @@ import img1 from "../../assets/images/home_page_img1.jpg";
 import img2 from "../../assets/images/home_page_img2.jpg";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
+import FooterSection from "../../components/FooterSection";
 
-const Home = () => {
+function Home() {
   const navigate = useNavigate();
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
   const handleNavigate = (path) => {
     navigate(path);
@@ -75,13 +77,21 @@ const Home = () => {
                   excel in the world of e-commerce, despite the unique
                   challenges they face.
                 </p>
+                {/* {arr.map((element) => {
+                  if (element % 2 == 0) {
+                    return <p>{element}</p>;
+                  }
+                })} */}
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div className="row">
+        <FooterSection />
+      </div>
     </div>
   );
-};
+}
 
 export default Home;
