@@ -91,6 +91,18 @@ function HeaderSection() {
                 <a
                   href=""
                   className="nav-link"
+                  onClick={() => handleNavigate("products")}
+                >
+                  Products
+                </a>
+              </li>
+              <li
+                className="nav-item pe-5"
+                style={{ color: "black", fontSize: "17px", fontWeight: "500" }}
+              >
+                <a
+                  href=""
+                  className="nav-link"
                   onClick={() => handleNavigate("orderlinks")}
                 >
                   Order Links
@@ -176,6 +188,18 @@ function HeaderSection() {
                 aria-controls="orders"
               >
                 Orders
+              </a>
+              <a
+                className={`list-group-item list-group-item-action ${
+                  activeTab === "products" ? "list-group-item-success" : ""
+                }`}
+                onClick={() => handleTabClick("products")}
+                data-toggle="list"
+                href="#"
+                role="tab"
+                aria-controls="products"
+              >
+                Products
               </a>
               <a
                 className={`list-group-item list-group-item-action ${
