@@ -4,6 +4,7 @@ import img2 from "../../assets/images/home_page_img2.jpg";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
 import FooterSection from "../../components/FooterSection";
+import HeaderSection from "../../components/HeaderSection";
 
 function Home() {
   const navigate = useNavigate();
@@ -15,7 +16,10 @@ function Home() {
 
   return (
     <div>
-      <div className="container">
+      <div className="row">
+        <HeaderSection />
+      </div>
+      <div className="container" style={{ marginTop: "110px" }}>
         <div className="row mt-4 pb-md-4 pb-1">
           <div className="col-12 col-lg-6 ">
             <div className="">

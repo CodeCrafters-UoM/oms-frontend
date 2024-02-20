@@ -3,8 +3,13 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsPerson } from "react-icons/bs";
 import { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
+import { useNavigate } from "react-router";
 
 function HeaderSection() {
+  const navigate = useNavigate();
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -20,7 +25,7 @@ function HeaderSection() {
   return (
     <>
       <div
-        className="navbar navbar-expand-md fixed-top"
+        className="navbar navbar-expand-lg fixed-top"
         style={{ backgroundColor: "#BABBBA" }}
       >
         <div className="container-fluid d-flex">
@@ -59,7 +64,11 @@ function HeaderSection() {
                 className="nav-item pe-5"
                 style={{ color: "black", fontSize: "17px", fontWeight: "500" }}
               >
-                <a href="#home" className="nav-link h5">
+                <a
+                  href=""
+                  className="nav-link h5"
+                  onClick={() => handleNavigate("")}
+                >
                   Home
                 </a>
               </li>
@@ -67,7 +76,11 @@ function HeaderSection() {
                 className="nav-item pe-5"
                 style={{ color: "black", fontSize: "17px", fontWeight: "500" }}
               >
-                <a href="#orders" className="nav-link">
+                <a
+                  href=""
+                  className="nav-link"
+                  onClick={() => handleNavigate("orders")}
+                >
                   Orders
                 </a>
               </li>
@@ -75,7 +88,11 @@ function HeaderSection() {
                 className="nav-item pe-5"
                 style={{ color: "black", fontSize: "17px", fontWeight: "500" }}
               >
-                <a href="#order-links" className="nav-link">
+                <a
+                  href=""
+                  className="nav-link"
+                  onClick={() => handleNavigate("orderlinks")}
+                >
                   Order Links
                 </a>
               </li>
@@ -83,7 +100,11 @@ function HeaderSection() {
                 className="nav-item pe-5"
                 style={{ color: "black", fontSize: "17px", fontWeight: "500" }}
               >
-                <a href="#reports" className="nav-link">
+                <a
+                  href=""
+                  className="nav-link"
+                  onClick={() => handleNavigate("reports")}
+                >
                   Reports
                 </a>
               </li>
@@ -91,7 +112,11 @@ function HeaderSection() {
                 className="nav-item pe-5"
                 style={{ color: "black", fontSize: "17px", fontWeight: "500" }}
               >
-                <a href="#contact" className="nav-link">
+                <a
+                  href=""
+                  className="nav-link"
+                  onClick={() => handleNavigate("contactus")}
+                >
                   Contact Us
                 </a>
               </li>
@@ -105,7 +130,12 @@ function HeaderSection() {
             {"|"}
             <BsPerson
               className="icon"
-              style={{ fontSize: "25px", marginLeft: "10px" }}
+              style={{
+                fontSize: "25px",
+                marginLeft: "10px",
+                cursor: "pointer",
+              }}
+              onClick={() => handleNavigate("profile")}
             />
           </div>
         </div>
