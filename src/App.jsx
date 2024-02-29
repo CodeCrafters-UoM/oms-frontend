@@ -3,9 +3,11 @@ import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./routes/routes";
 import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
 
+
 function App() {
   return (
     <>
+    <AddItems />
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
