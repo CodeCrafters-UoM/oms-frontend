@@ -1,11 +1,15 @@
-import "./App.css";
-import Product from "./Components/Product";
+
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/routes";
+import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-
   return (
     <>
-    <Product />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </>
   );
 }
