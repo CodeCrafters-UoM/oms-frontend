@@ -12,7 +12,7 @@ const OrderListPagination = ({ postsPerPage, totalPosts, setrCurrentPage, curren
                 {pageNumbers.map(number => (
                     <li key={number} className={'page-item'}>
                         <div className={number === currentPage ? "active" : "" }>
-                        <a onClick={() => setrCurrentPage(number)} href='!#' className={'page-link'}>
+                        <a onClick={() => setrCurrentPage(number)} className={'page-link'}>
                             
                                 {number}
                                  {/* number == currentPage ? "active" : "" */}

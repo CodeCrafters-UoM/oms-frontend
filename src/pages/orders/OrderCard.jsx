@@ -8,13 +8,13 @@ export const OrderCard = ({ orders, renderTooltip }) => {
         <Card className="cardBack mx-4 my-3 d-flex rounded-4" style={{ width: '30rem', overflow: 'hidden' }}
             key={orders.id} >
             <Card.Body style={{ padding: 0, position: 'relative' }}>
-                <div className="" style={{
+                <div className="" style={{ 
                     height: '2rem', backgroundColor: '#04952D',
                     position: 'absolute', top: 0, right: '-12px', width: '150px',
                     borderBottomLeftRadius: '50px'
                 }}>
                     <div className="justify-content-center">
-                        <p className="text-center" style={{ color: 'white' }}> New  </p>
+                        <p className="text-center" style={{ color: 'white' }}> {orders.status}   </p>
                     </div>
                 </div>
                 <div>
