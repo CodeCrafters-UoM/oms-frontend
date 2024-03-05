@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
+import OrderListCusDetails from './OrderListCusDetails';
 
 const OrderListModal = ({ orderDetails, orders }) => {
 
@@ -107,16 +108,17 @@ const OrderListModal = ({ orderDetails, orders }) => {
                     )
                   }
                 </div>
-
+                
+                 {/* button */}
                 <div className="text-center mx-3 my-3">
-                    // button
-    
+                  
+                    <OrderListCusDetails />
 
 
                            
                 </div>
 
-                
+
               </div>
             </Col>
 
