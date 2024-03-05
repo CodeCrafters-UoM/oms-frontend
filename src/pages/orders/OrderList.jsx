@@ -19,16 +19,40 @@ const OrderList = () => {
       time: '3.00 pm ',
       stockNo: '10023 : F005-Frock',
       customerName: 'A.M Ranaweera',
-      address: 'abc',
-      status:'New'
-    },
+      address: 'no 03/123 , paramulla , matara  ',
+      status:'New',
+      orderId:'110235',
+      ordercode: 'D0012',
+      orderDiscription: 'denim',
+      quantity: '2', 
+      contact: '071 3153849',
+      paymentDelivery: 'cash on delivery',
+      unitAmount: '2500.00 LKR',
+      totalAmount: '50000.00 LKR',
+      pastAllOrder: '10',
+      PastMyOrder: '3',
+      ReturnAllOrder: '2',
+      ReturnMyOrder: '1' 
+    }, 
     {
       date: '01/04/2023',
       time: '5.00pm',
       stockNo: '10023 : D003-short',
       customerName: 'T.M kumara',
       address: 'cde',
-      status:'Accept'
+      status:'Accept',
+      orderId:'110236',
+      ordercode: 'D0013',
+      orderDiscription: 'shirt',
+      quantity: '1', 
+      contact: '077 3153849',
+      paymentDelivery: 'cash on delivery',
+      unitAmount: '1500.00 LKR',
+      totalAmount: '6000.00 LKR',
+      pastAllOrder: '10',
+      PastMyOrder: '3',
+      ReturnAllOrder: '2',
+      ReturnMyOrder: '1'
     },
     {
       date: '01/03/2023',
@@ -36,7 +60,19 @@ const OrderList = () => {
       stockNo: '10032 : D004-short',
       customerName: 'S.A kamal',
       address: 'pmfkfk',
-      status:'Deliver'
+      status:'Deliver',
+      orderId:'110294',
+      ordercode: 'D0043',
+      orderDiscription: 'denim',
+      quantity: '3', 
+      contact: '071 3254849',
+      paymentDelivery: 'cash on delivery',
+      unitAmount: '6350.00 LKR',
+      totalAmount: '50000.00 LKR',
+      pastAllOrder: '12',
+      PastMyOrder: '5',
+      ReturnAllOrder: '1',
+      ReturnMyOrder: '0'
     },
     {
       date: '21/11/2023',
@@ -44,7 +80,19 @@ const OrderList = () => {
       stockNo: '24023 : D021-short',
       customerName: 'P.K kapila',
       address: 'shien',
-      status:'Reject'
+      status:'Reject',
+      orderId:'320235',
+      ordercode: 'D0238',
+      orderDiscription: 'denim',
+      quantity: '2', 
+      contact: '071 3153849',
+      paymentDelivery: 'cash on delivery',
+      unitAmount: '2500.00 LKR',
+      totalAmount: '50000.00 LKR',
+      pastAllOrder: '10',
+      PastMyOrder: '3',
+      ReturnAllOrder: '2',
+      ReturnMyOrder: '1'
     },
     {
       date: '16/08/2023',
@@ -137,7 +185,10 @@ const OrderList = () => {
           currentPosts.filter((orders) => {
             return search.toLowerCase() === '' ? orders : orders.customerName.toLowerCase().includes(search.toLowerCase());
           }).map((orders) => (
-               <OrderCard orders = {orders} renderTooltip={renderTooltip}/>   
+               <OrderCard orders = {orders} 
+                          renderTooltip={renderTooltip}
+                          orderDetails ={orderDetails} 
+                          search ={search}/>   
          ))}
       </Row>
 

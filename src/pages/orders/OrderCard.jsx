@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import OrderListModal from './OrderListModal';
 
-export const OrderCard = ({ orders, renderTooltip }) => {
+export const OrderCard = ({ orders, renderTooltip , orderDetails}) => {
     return (
         <Card className="cardBack mx-4 my-3 d-flex rounded-4" style={{ width: '30rem', overflow: 'hidden' }}
             key={orders.id} >
@@ -34,7 +34,8 @@ export const OrderCard = ({ orders, renderTooltip }) => {
                         overlay={renderTooltip}
                     >
                         <div className="text-center mx-3 my-3">
-                            <OrderListModal />
+                            <OrderListModal orderDetails ={orderDetails}
+                                            orders = {orders} />
                         </div>
                     </OverlayTrigger>
                 </div>

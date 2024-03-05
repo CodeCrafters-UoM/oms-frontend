@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
-const OrderListModal = () => { 
+const OrderListModal = ({ orderDetails, orders }) => {
 
 
   const [show, setShow] = useState(false);
@@ -25,10 +25,29 @@ const OrderListModal = () => {
     { name: 'Reject', value: '4' },
   ];
 
+  //  event
+  const handleClick = () => {
+    handleShow();
+    handleFilter();
+  }
+
+  // filter one persion
+  const [filteredRecord, setFilteredRecord] = useState(null);
+
+  const handleFilter = () => {
+    const filterCondition = (record) => record.customerName === orders.customerName;
+    const filteredRecords = Object.values(orderDetails).filter(filterCondition);
+    if (filteredRecords.length > 0) {
+      setFilteredRecord(filteredRecords[0]);
+    } else {
+      setFilteredRecord(null);
+    }
+  };
 
   return (
+    // must be change value order unique name - orders.customerId
     <>
-      <Button variant="outline-success" onClick={handleShow}> more details </Button>{' '}
+      <Button variant="outline-success" onClick={handleClick} value={orders.customerName}> more details </Button>{' '}
 
       <Modal
         size="lg"
@@ -49,14 +68,22 @@ const OrderListModal = () => {
             {/* Order deatils */}
             <Col sm>
               <div className="ModalHederBack">
-                <div className="mx-3 my-1 d-flex">
+                <div className="mx-3 my-3 d-flex">
                   <h5>Customer Details</h5>
                 </div>
-                <div className="mx-3 my-1">
-                  <p> order id: <br />
-                    00094       <br />
-                    order coed : <br />
-                    kt222</p>
+                <div className="mx-3 my-3">
+                  {
+                    filteredRecord ? (
+                      <div>
+                        <h6>Order id: <br /><span>{filteredRecord.orderId}</span></h6>
+                        <h6>Order Code: <br /><span>{filteredRecord.ordercode} </span></h6>
+                        <h6>Order description: <br /><span>{filteredRecord.orderDiscription}</span></h6>
+                        <h6>Quantity: <br /><span> {filteredRecord.quantity}</span></h6>
+                      </div>
+                    ) : (
+                      <p>No matching record found.</p>
+                    )
+                  }
                 </div>
               </div>
             </Col>
@@ -64,23 +91,53 @@ const OrderListModal = () => {
             {/* Customer details */}
             <Col sm>
               <div className="ModalHederBack">
-                <div className="mx-3 my-1 d-flex">
+                <div className="mx-3 my-3 d-flex">
                   <h5>Customer Details</h5>
                 </div>
-                <div className="mx-3 my-1">
-
+                <div className="mx-3 my-3">
+                  {
+                    filteredRecord ? (
+                      <div>
+                        <h6>Customer Name: <br /><span>{filteredRecord.customerName}</span></h6>
+                        <h6>Address: <br /><span>{filteredRecord.address} </span></h6>
+                        <h6>Contact: <br /><span>{filteredRecord.contact}</span></h6>
+                      </div>
+                    ) : (
+                      <p>No matching record found.</p>
+                    )
+                  }
                 </div>
+
+                <div className="text-center mx-3 my-3">
+                    // button
+    
+
+
+                           
+                </div>
+
+                
               </div>
             </Col>
 
             {/* Peyment Details */}
             <Col sm>
               <div className="ModalHederBack">
-                <div className="mx-3 my-1 d-flex">
-                  <h5>Customer Details</h5>
+                <div className="mx-3 my-3 d-flex">
+                  <h5>Payment Details</h5>
                 </div>
-                <div className="">
-                  <p> </p>
+                <div className="mx-3 my-3">
+                  {
+                    filteredRecord ? (
+                      <div>
+                        <h6>Payment Method: <br /><span>{filteredRecord.paymentDelivery}</span></h6>
+                        <h6>Unit Amount: <br /><span>{filteredRecord.unitAmount} </span></h6>
+                        <h6>Total Amount: <br /><span>{filteredRecord.totalAmount}</span></h6>
+                      </div>
+                    ) : (
+                      <p>No matching record found.</p>
+                    )
+                  }
                 </div>
               </div>
             </Col>
@@ -88,7 +145,7 @@ const OrderListModal = () => {
           </Row>
 
           <Row>
-            <div className="text-center mx-3 my-1">
+            <div className="text-center mx-3 my-3">
 
               <ButtonGroup>
                 {radios.map((radio, idx) => (
@@ -96,8 +153,8 @@ const OrderListModal = () => {
                     key={idx}
                     id={`radio-${idx}`}
                     type="radio"
-                    variant={idx === 1 ? 'outline-warning' : idx === 2 ?'outline-success' :
-                             idx === 3 ?'outline-danger' : 'outline-primary' }
+                    variant={idx === 1 ? 'outline-warning' : idx === 2 ? 'outline-success' :
+                      idx === 3 ? 'outline-danger' : 'outline-primary'}
                     name="radio"
                     value={radio.value}
                     checked={radioValue === radio.value}
