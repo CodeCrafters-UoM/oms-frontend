@@ -48,7 +48,7 @@ function Product() {
    
     <div className="row ">
         <div className="col-lg-6">
-       <div>
+        <div>
       {itemList.map(item => (
         <Item key={item.id} item={item} />
       ))}
