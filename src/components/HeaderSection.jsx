@@ -32,7 +32,7 @@ function HeaderSection() {
           <div className="">
             <button
               onClick={toggleMenu}
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#main-nav"
@@ -48,7 +48,7 @@ function HeaderSection() {
             </button>
           </div>
           <div className="">
-            <a href="#intro" class="navbar-brand">
+            <a href="#intro" className="navbar-brand">
               <img src="logo.png" alt="logo" width="110" height="40" />
             </a>
           </div>

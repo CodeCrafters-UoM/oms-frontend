@@ -2,14 +2,21 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputGroup from "react-bootstrap/InputGroup";
+import axios from "axios";
 
 function LoginForm() {
   const [validated, setValidated] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -17,7 +24,51 @@ function LoginForm() {
     }
 
     setValidated(true);
+    if (form.checkValidity() === true) {
+      const user = {
+        username: form.elements[0].value,
+        password: form.elements[1].value,
+      };
+      console.log(user);
+      try {
+        const res = await axios.post("http://localhost:8000/login", user);
+        console.log(res.status);
+        if (res.status === 200) {
+          alert("User login Successfully");
+          navigate("/");
+        } else {
+          alert("Login Failed");
+        }
+      } catch (error) {
+        if (error.response.status === 401) {
+          // Unauthorized (Incorrect credentials)
+          alert("Incorrect username or password");
+        } else {
+          console.error("An error occurred:", error);
+        }
+      }
+      // axios
+      //   .post("http://localhost:8000/login", user)
+      // .then((res) => {
+      //   console.log(res.status);
+      //   if (res.status === 200) {
+      //     alert("User login Successfully");
+      //     navigate("/");
+      //   } else {
+      //     alert("Login Failed");
+      //   }
+      // })
+      // .catch((error) => {
+      //   if (error.response.status === 401) {
+      //     // Unauthorized (Incorrect credentials)
+      //     alert("Incorrect username or password");
+      //   } else {
+      //     console.error("An error occurred:", error);
+      //   }
+      // });
+    }
   };
+
   const togglePasswordVisibility = () => {
     setPasswordVisible((prev) => !prev);
   };
@@ -29,6 +80,7 @@ function LoginForm() {
         <InputGroup
           hasValidation
           className="shadow-lg border border-1 rounded border-success-subtle"
+          onChange={(e) => setValues({ ...values, username: e.target.value })}
         >
           <InputGroup.Text id="inputGroupPrepend">
             <img src="/person.svg" alt="" />
@@ -47,6 +99,7 @@ function LoginForm() {
         <InputGroup
           hasValidation
           className="shadow-lg border border-1 rounded border-success-subtle"
+          onChange={(e) => setValues({ ...values, password: e.target.value })}
         >
           <InputGroup.Text id="inputGroupPrepend">
             <img src="/lock.svg" alt="" />

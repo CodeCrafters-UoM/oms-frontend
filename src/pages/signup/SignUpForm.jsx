@@ -1,190 +1,68 @@
-// import { useState } from "react";
-// import Button from "react-bootstrap/Button";
-// import Form from "react-bootstrap/Form";
-// import InputGroup from "react-bootstrap/InputGroup";
-// import Row from "react-bootstrap/Row";
-// import validationSchema from "./Validations";
-// import { Formik, Field, ErrorMessage } from "formik";
-
-// function SignUpForm() {
-//   const [validated, setValidated] = useState(false);
-//   const [passwordVisible, setPasswordVisible] = useState(false);
-
-//   const handleSubmit = (event) => {
-//     const form = event.currentTarget;
-//     if (form.checkValidity() === false) {
-//       event.preventDefault();
-//       event.stopPropagation();
-//     }
-
-//     setValidated(true);
-//   };
-//   const togglePasswordVisibility = () => {
-//     setPasswordVisible((prev) => !prev);
-//   };
-
-//   return (
-//     <Formik
-//       initialValues={{
-//         name: "",
-//         companyName: "",
-//         email: "",
-//         contactNumber: "",
-//         username: "",
-//         password: "",
-//         termsAndConditions: false,
-//       }}
-//       validationSchema={validationSchema} // Pass Yup validation schema here
-//       onSubmit={handleSubmit}
-//     >
-//       {({ isSubmitting }) => (
-//         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-//           {/* Your form components */}
-//           <Row className="mb-3">
-//             <Form.Group className="mb-3" controlId="validationCustom01">
-//               <Form.Label>Name</Form.Label>
-//               <Field name="name">
-//                 {({ field }) => (
-//                   <Form.Control
-//                     {...field}
-//                     required
-//                     type="text"
-//                     placeholder="Name"
-//                     defaultValue=""
-//                     isInvalid={field.value && field.error ? true : false}
-//                   />
-//                 )}
-//               </Field>
-//               <ErrorMessage
-//                 name="name"
-//                 component="div"
-//                 className="text-danger"
-//               />
-//             </Form.Group>
-//             <Form.Group className="mb-3" controlId="validationCustom02">
-//               <Form.Label>Company Name</Form.Label>
-//               <Form.Control
-//                 required
-//                 type="text"
-//                 placeholder="ABC"
-//                 defaultValue=""
-//               />
-//               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-//             </Form.Group>
-//             <Form.Group className="mb-3" controlId="validationCustomEmail">
-//               <Form.Label>Email address</Form.Label>
-//               <Form.Control
-//                 type="email"
-//                 required
-//                 placeholder="name@example.com"
-//                 defaultValue=""
-//                 aria-describedby="inputGroupPrepend"
-//               />
-//             </Form.Group>
-//             <Form.Group className="mb-3" controlId="validationCustom03">
-//               <Form.Label>Contact Number</Form.Label>
-//               <Form.Control type="text" placeholder="Phone" required />
-//               <Form.Control.Feedback type="invalid">
-//                 Please provide a valid mobile number.
-//               </Form.Control.Feedback>
-//             </Form.Group>
-//             <Form.Group className="mb-3" controlId="validationCustomUsername">
-//               <Form.Label>Username</Form.Label>
-//               <InputGroup hasValidation>
-//                 <InputGroup.Text id="inputGroupPrepend">
-//                   <img src="../../../public/user-regular.svg" alt="" />
-//                 </InputGroup.Text>
-//                 <Form.Control
-//                   type="text"
-//                   placeholder="Username"
-//                   aria-describedby="inputGroupPrepend"
-//                   required
-//                 />
-//                 <Form.Control.Feedback type="invalid">
-//                   Please choose a username.
-//                 </Form.Control.Feedback>
-//               </InputGroup>
-//             </Form.Group>
-//             <Form.Group controlId="validationCustomPassword">
-//               <Form.Label>Password</Form.Label>
-//               <InputGroup hasValidation>
-//                 <InputGroup.Text id="inputGroupPrepend">
-//                   <img src="../../../public/lock.svg" alt="" />
-//                 </InputGroup.Text>
-
-//                 <Form.Control
-//                   type={passwordVisible ? "text" : "password"}
-//                   placeholder="Password"
-//                   aria-describedby="inputGroupPrepend"
-//                   required
-//                 />
-//                 <Button
-//                   variant="outline-light"
-//                   className="border"
-//                   onClick={togglePasswordVisibility}
-//                 >
-//                   <img
-//                     src={
-//                       passwordVisible
-//                         ? "../../../public/eye-slash.svg"
-//                         : "../../../public/eye.svg"
-//                     }
-//                     alt="Toggle Password Visibility"
-//                   />
-//                 </Button>
-
-//                 <Form.Control.Feedback type="invalid">
-//                   Please enter a password.
-//                 </Form.Control.Feedback>
-//               </InputGroup>
-//             </Form.Group>
-//           </Row>
-//           <Form.Group className="mb-3 d-flex align-items-center justify-content-center">
-//             <Form.Check
-//               required
-//               label="I Agree to terms and conditions"
-//               feedback="You must agree before submitting."
-//               feedbackType="invalid"
-//             />
-//           </Form.Group>
-//           <div className="d-flex align-items-center justify-content-center">
-//             <Button type="submit" className="btn btn-success">
-//               Submit form
-//             </Button>
-//           </div>
-//         </Form>
-//       )}
-//     </Formik>
-//   );
-// }
-
-// export default SignUpForm;
+import React from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
-import validationSchema from "./Validations";
-import { Formik, Field, ErrorMessage } from "formik";
+import * as formik from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function SignUpForm() {
+  const { Formik, Field, ErrorMessage } = formik;
+  const navigate = useNavigate();
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .matches(/^[a-zA-Z\s]+$/, "Name should contain only letters")
+      .required("Name is required"),
+    businessName: Yup.string()
+      .matches(/^[a-zA-Z\s]+$/, "Name should contain only letters")
+      .required("Business Name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    contactNumber: Yup.string()
+      .matches(/^[0-9]{10}$/, "Contact Number should contain 10 digits")
+      .required("Contact Number is required"),
+    username: Yup.string().required("Username is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters")
+      .max(12, "Password must be at most 12 characters"),
+    termsAndConditions: Yup.boolean().oneOf(
+      [true],
+      "Terms and Conditions must be accepted"
+    ),
+  });
   const [validated, setValidated] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleSubmit = (event, formikBag) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-      formikBag.setTouched({
-        ...formikBag.touched,
-        ...Object.keys(formikBag.values).reduce((acc, key) => {
-          acc[key] = true;
-          return acc;
-        }, {}),
+  const handleOnSubmit = (values, formikBag) => {
+    console.log(values);
+    formikBag.setSubmitting(false);
+    const seller = {
+      name: values.name,
+      businessName: values.businessName,
+      email: values.email,
+      contactNumber: values.contactNumber,
+      username: values.username,
+      password: values.password,
+    };
+
+    axios
+      .post("http://localhost:8000/sellerregister", seller)
+      .then((res) => {
+        console.log(seller);
+        if (res.status === 200) {
+          alert("Seller Registered Successfully");
+          navigate("/login");
+        } else {
+          alert("Seller Registration Failed");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    }
-    setValidated(true);
   };
 
   const togglePasswordVisibility = () => {
@@ -195,22 +73,20 @@ function SignUpForm() {
     <Formik
       initialValues={{
         name: "",
-        companyName: "",
+        businessName: "",
         email: "",
         contactNumber: "",
         username: "",
         password: "",
         termsAndConditions: false,
       }}
-      validationSchema={validationSchema} // Pass Yup validation schema here
-      onSubmit={handleSubmit}
+      validationSchema={validationSchema}
+      onSubmit={(values, formikBag) => {
+        handleOnSubmit(values, formikBag);
+      }}
     >
-      {({ isSubmitting, handleSubmit }) => (
-        <Form
-          noValidate
-          validated={validated}
-          onSubmit={(e) => handleSubmit(e)}
-        >
+      {({ handleSubmit, handleChange, values, errors, touched }) => (
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Row className="mb-3">
             <Form.Group className="mb-3" controlId="validationCustom01">
               <Form.Label>Name</Form.Label>
@@ -218,11 +94,12 @@ function SignUpForm() {
                 {({ field }) => (
                   <Form.Control
                     {...field}
-                    required
                     type="text"
                     placeholder="Name"
                     defaultValue=""
-                    isInvalid={field.value && field.error ? true : false}
+                    value={values.name}
+                    isValid={touched.name && !errors.name}
+                    onChange={handleChange}
                   />
                 )}
               </Field>
@@ -235,22 +112,23 @@ function SignUpForm() {
               </small>
             </Form.Group>
             <Form.Group className="mb-3" controlId="validationCustom02">
-              <Form.Label>Company Name</Form.Label>
-              <Field name="companyName">
+              <Form.Label>Business Name</Form.Label>
+              <Field name="businessName">
                 {({ field }) => (
                   <Form.Control
                     {...field}
-                    required
                     type="text"
-                    placeholder="Company Name"
+                    placeholder="business Name"
                     defaultValue=""
-                    isInvalid={field.value && field.error ? true : false}
+                    value={values.businessName}
+                    onChange={handleChange}
+                    isValid={touched.businessName && !errors.businessName}
                   />
                 )}
               </Field>
               <small>
                 <ErrorMessage
-                  name="companyName"
+                  name="businessName"
                   component="div"
                   className="text-danger"
                 />
@@ -265,8 +143,10 @@ function SignUpForm() {
                     type="email"
                     placeholder="name@example.com"
                     defaultValue=""
+                    value={values.email}
+                    onChange={handleChange}
                     aria-describedby="inputGroupPrepend"
-                    isInvalid={field.value && field.error ? true : false}
+                    isValid={touched.email && !errors.email}
                   />
                 )}
               </Field>
@@ -286,8 +166,10 @@ function SignUpForm() {
                     {...field}
                     type="text"
                     placeholder="Phone"
-                    required
-                    isInvalid={field.value && field.error ? true : false}
+                    defaultValue=""
+                    value={values.contactNumber}
+                    onChange={handleChange}
+                    isValid={touched.contactNumber && !errors.contactNumber}
                   />
                 )}
               </Field>
@@ -312,8 +194,9 @@ function SignUpForm() {
                       type="text"
                       placeholder="Username"
                       aria-describedby="inputGroupPrepend"
-                      required
-                      isInvalid={field.value && field.error ? true : false}
+                      value={values.username}
+                      onChange={handleChange}
+                      isValid={touched.username && !errors.username}
                     />
                   </InputGroup>
                 )}
@@ -340,8 +223,9 @@ function SignUpForm() {
                         type={passwordVisible ? "text" : "password"}
                         placeholder="Password"
                         aria-describedby="inputGroupPrepend"
-                        required
-                        isInvalid={field.value && field.error ? true : false}
+                        value={values.password}
+                        onChange={handleChange}
+                        isValid={touched.password && !errors.password}
                       />
                       <Button
                         variant="outline-light"
@@ -378,7 +262,6 @@ function SignUpForm() {
                 {({ field }) => (
                   <Form.Check
                     {...field}
-                    required
                     label="I Agree to terms and conditions"
                     feedback="You must agree before submitting."
                     feedbackType="invalid"
