@@ -7,9 +7,9 @@ import { useNavigate } from "react-router";
 
 function HeaderSection() {
   const navigate = useNavigate();
-  const handleNavigate = (path) => {
-    navigate(path);
-  };
+  // const handleNavigate = (path) => {
+  //   navigate(path);
+  // };
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -67,7 +67,8 @@ function HeaderSection() {
                 <a
                   href=""
                   className="nav-link h5"
-                  onClick={() => handleNavigate("")}
+                  // onClick={() => handleNavigate("")}
+                  onClick={() => navigate("/")}
                 >
                   Home
                 </a>
@@ -79,7 +80,7 @@ function HeaderSection() {
                 <a
                   href=""
                   className="nav-link"
-                  onClick={() => handleNavigate("orders")}
+                  onClick={() => navigate("/orders")}
                 >
                   Orders
                 </a>
@@ -91,7 +92,7 @@ function HeaderSection() {
                 <a
                   href=""
                   className="nav-link"
-                  onClick={() => handleNavigate("products")}
+                  onClick={() => navigate("/products")}
                 >
                   Products
                 </a>
@@ -103,7 +104,7 @@ function HeaderSection() {
                 <a
                   href=""
                   className="nav-link"
-                  onClick={() => handleNavigate("orderlinks")}
+                  onClick={() => navigate("/orderLinks")}
                 >
                   Order Links
                 </a>
@@ -115,7 +116,7 @@ function HeaderSection() {
                 <a
                   href=""
                   className="nav-link"
-                  onClick={() => handleNavigate("reports")}
+                  onClick={() => navigate("/reports")}
                 >
                   Reports
                 </a>
@@ -127,7 +128,7 @@ function HeaderSection() {
                 <a
                   href=""
                   className="nav-link"
-                  onClick={() => handleNavigate("contactus")}
+                  onClick={() => navigate("/contactus")}
                 >
                   Contact Us
                 </a>
@@ -147,7 +148,7 @@ function HeaderSection() {
                 marginLeft: "10px",
                 cursor: "pointer",
               }}
-              onClick={() => handleNavigate("profile")}
+              onClick={() => navigate("/profile")}
             />
           </div>
         </div>
@@ -169,7 +170,7 @@ function HeaderSection() {
                 className={`list-group-item list-group-item-action ${
                   activeTab === "home" ? "list-group-item-success" : ""
                 }`}
-                onClick={() => handleTabClick("home")}
+                onClick={() => navigate("/")}
                 data-toggle="list"
                 href="#"
                 role="tab"
@@ -181,7 +182,7 @@ function HeaderSection() {
                 className={`list-group-item list-group-item-action ${
                   activeTab === "orders" ? "list-group-item-success" : ""
                 }`}
-                onClick={() => handleTabClick("orders")}
+                onClick={() => navigate("/orders")}
                 data-toggle="list"
                 href="#"
                 role="tab"
@@ -193,7 +194,7 @@ function HeaderSection() {
                 className={`list-group-item list-group-item-action ${
                   activeTab === "products" ? "list-group-item-success" : ""
                 }`}
-                onClick={() => handleTabClick("products")}
+                onClick={() => navigate("/products")}
                 data-toggle="list"
                 href="#"
                 role="tab"
@@ -205,7 +206,7 @@ function HeaderSection() {
                 className={`list-group-item list-group-item-action ${
                   activeTab === "order-links" ? "list-group-item-success" : ""
                 }`}
-                onClick={() => handleTabClick("order-links")}
+                onClick={() => navigate("/orderLinks")}
                 data-toggle="list"
                 href="#"
                 role="tab"
@@ -217,7 +218,7 @@ function HeaderSection() {
                 className={`list-group-item list-group-item-action ${
                   activeTab === "reports" ? "list-group-item-success" : ""
                 }`}
-                onClick={() => handleTabClick("reports")}
+                onClick={() => navigate("/reports")}
                 data-toggle="list"
                 href="#"
                 role="tab"
@@ -229,7 +230,7 @@ function HeaderSection() {
                 className={`list-group-item list-group-item-action ${
                   activeTab === "contact" ? "list-group-item-success" : ""
                 }`}
-                onClick={() => handleTabClick("contact")}
+                onClick={() => navigate("/contactus")}
                 data-toggle="list"
                 href="#"
                 role="tab"
