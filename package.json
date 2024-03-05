@@ -11,6 +11,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "axiom": "^0.1.6",
     "bootstrap": "^5.3.2",
     "formik": "^2.4.5",
     "husky": "^8.0.3",
