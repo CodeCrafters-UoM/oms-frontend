@@ -1,10 +1,26 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FiSearch } from "react-icons/fi";
+import Item from './Item';
 
 
 function Product() {
+  const [itemList, setItemList] = useState([]);
+
+  useEffect(() => {
+    const fetchItemList = async () => {
+      try {
+        const response = await axios.get("http://your-backend-url/api/items");
+        setItemList(response.data);
+      } catch (error) {
+        console.error("Error fetching item list:", error);
+      }
+    };
+
+    fetchItemList();
+  }, []);
+
   return (
     <>
      <div style={{ position: 'fixed', left: '92%', transform: 'translate(-50%, -50%)', bottom: '20px', zIndex: '999' }}>
@@ -32,147 +48,13 @@ function Product() {
    
     <div className="row ">
         <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0' }}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material git 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-
-  
-
-    <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0'}}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
+       <div>
+      {itemList.map(item => (
+        <Item key={item.id} item={item} />
+      ))}
     </div>
     </div>
-
-   
-
-    <div className="row mt-2">
-        <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0' }}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material git 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
     </div>
-
-    
-    <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0'}}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-    </div>
-
-    <div className="row mt-2">
-        <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0' }}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material git 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-
-    
-    <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0'}}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-    </div>
-
-    <div className="row mt-2">
-        <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0' }}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material git 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-
-    
-    <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0'}}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-    </div>
-
 
     </>
     
