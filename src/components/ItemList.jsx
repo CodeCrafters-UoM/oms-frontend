@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FiSearch } from "react-icons/fi";
-import Item from './Item';
+import Item from '../pages/products/item';
 
 
 function Product() {
@@ -11,7 +11,7 @@ function Product() {
   useEffect(() => {
     const fetchItemList = async () => {
       try {
-        const response = await axios.get("http://your-backend-url/api/items");
+        const response = await axios.get("http://localhost:8000/products");
         setItemList(response.data);
       } catch (error) {
         console.error("Error fetching item list:", error);
@@ -47,13 +47,16 @@ function Product() {
     </div>
    
     <div className="row ">
-        <div className="col-lg-6">
-        <div>
-      {itemList.map(item => (
-        <Item key={item.id} item={item} />
-      ))}
-    </div>
-    </div>
+      <div className="d-flex flex-row">
+      <div className="col-lg-6">
+        
+        {itemList.map(item => (
+          <Item key={item.id} item={item} />
+        ))}
+      
+      </div>
+      </div>
+     
     </div>
 
     </>
