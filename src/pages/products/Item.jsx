@@ -9,7 +9,7 @@ function Item({ item }) { // Receive item details as props
         <Card.Body>
           <Card.Title>{item.name}</Card.Title>
           <Card.Text>
-            Code : {item.code} <br />
+            Code : {item.productCode} <br />
             Price : {item.price} LKR
           </Card.Text>
           <Card.Text>{item.description}</Card.Text>

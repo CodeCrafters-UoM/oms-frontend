@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { FiSearch } from "react-icons/fi";
 import Item from '../pages/products/item';
 
@@ -23,7 +22,7 @@ function Product() {
 
   return (
     <>
-     <div style={{ position: 'fixed', left: '92%', transform: 'translate(-50%, -50%)', bottom: '20px', zIndex: '999' }}>
+     <div style={{ position: 'fixed', left: '92%', transform: 'translate(-50%, -50%)', bottom: '200px', zIndex: '999' }}>
         <button type="button" className="btn btn-success rounded-pill border btn-lg ps-5  pe-5 pt-1 pb-1">Add Item</button>
       </div>
 
@@ -46,18 +45,22 @@ function Product() {
      
     </div>
    
-    <div className="row ">
-      <div className="d-flex flex-row">
-      <div className="col-lg-6">
-        
-        {itemList.map(item => (
-          <Item key={item.id} item={item} />
-        ))}
-      
+    <div className="row mt-3">
+        <div className="col-lg-6">
+              {itemList.slice(0, Math.ceil(itemList.length / 2)).map(item => (
+                <tr key={item.id}>
+                  <td><Item item={item}/></td>
+                </tr>
+              ))}
+        </div>
+        <div className="col-lg-6">
+              {itemList.slice(Math.ceil(itemList.length / 2)).map(item => (
+                <tr key={item.id}>
+                  <td><Item item={item} /></td>
+                </tr>
+              ))}
+        </div>
       </div>
-      </div>
-     
-    </div>
 
     </>
     
