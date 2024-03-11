@@ -66,6 +66,7 @@ function AddItems() {
                                 name="productCode"
                                 value={formData.productCode}
                                 onChange={handleChange}
+                                style={{ backgroundColor: "#f2f2f2" }} 
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
@@ -78,6 +79,7 @@ function AddItems() {
                                 name="productName"
                                 value={formData.productName}
                                 onChange={handleChange}
+                                style={{ backgroundColor: "#f2f2f2" }} 
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
@@ -90,6 +92,7 @@ function AddItems() {
                                 name="productPrice"
                                 value={formData.productPrice}
                                 onChange={handleChange}
+                                style={{ backgroundColor: "#f2f2f2" }} 
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
@@ -101,6 +104,7 @@ function AddItems() {
                                 name="productDescription"
                                 value={formData.productDescription}
                                 onChange={handleChange}
+                                style={{ backgroundColor: "#f2f2f2" }} 
                             />
                         </Form.Group>
                         <Form.Group className="mb-5 ms-3 me-3" controlId="Form.ControlInput1">
@@ -110,6 +114,7 @@ function AddItems() {
                                 name="orderLink"
                                 value={formData.orderLink}
                                 onChange={handleChange}
+                                style={{ backgroundColor: "#f2f2f2" }} 
                             />
                         </Form.Group>
                         <Button type="submit" className=" mb-2 ps-5 pe-5 pt-2 pb-10 rounded-pill border position-absolute bottom-0 start-50 translate-middle-x" variant="success">

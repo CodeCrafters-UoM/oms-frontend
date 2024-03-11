@@ -30,49 +30,54 @@ function ItemDetails({ item, onUpdate, onRemove, onClose }) {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{item.productName}</Modal.Title>
+          <Modal.Title>{item.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="formProductCode">
+            <Form.Group className="mb-3" controlId="formProductCode">
               <Form.Label>Product Code</Form.Label>
               <Form.Control
                 type="text"
                 readOnly
                 defaultValue={item.productCode}
+                style={{ backgroundColor: "#f2f2f2" }} 
               />
             </Form.Group>
-            <Form.Group controlId="formProductName">
+            <Form.Group className="mb-3" controlId="formProductName">
               <Form.Label>Product Name</Form.Label>
               <Form.Control
                 type="text"
                 readOnly
-                defaultValue={item.productName}
+                defaultValue={item.name}
+                style={{ backgroundColor: "#f2f2f2" }} 
               />
             </Form.Group>
-            <Form.Group controlId="formProductPrice">
+            <Form.Group className="mb-3" controlId="formProductPrice">
               <Form.Label>Product Price</Form.Label>
               <Form.Control
                 type="text"
                 readOnly
-                defaultValue={item.productPrice}
+                defaultValue={item.price}
+                style={{ backgroundColor: "#f2f2f2" }} 
               />
             </Form.Group>
-            <Form.Group controlId="formProductDescription">
+            <Form.Group className="mb-3" controlId="formProductDescription">
               <Form.Label>Product Description</Form.Label>
               <Form.Control
                 as="textarea"
                 readOnly
                 rows={3}
-                defaultValue={item.productDescription}
+                defaultValue={item.description}
+                style={{ backgroundColor: "#f2f2f2" }} 
               />
             </Form.Group>
-            <Form.Group controlId="formOrderLink">
+            <Form.Group className="mb-3" controlId="formOrderLink">
               <Form.Label>Order Link</Form.Label>
               <Form.Control
                 type="text"
                 readOnly
                 defaultValue={item.orderLink}
+                style={{ backgroundColor: "#f2f2f2" }} 
               />
             </Form.Group>
           </Form>
