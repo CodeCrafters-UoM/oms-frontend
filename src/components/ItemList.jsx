@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FiSearch } from "react-icons/fi";
-import Item from "../pages/products/item";
+import Item from "../pages/products/Item";
 import AddItems from "./AddItems";
+import ItemDetails from "./ItemDetails";
 
-function Product() {
+function ItemList() {
   const [itemList, setItemList] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     const fetchItemList = async () => {
@@ -20,6 +22,26 @@ function Product() {
     fetchItemList();
   }, []);
 
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedItem(null);
+  };
+
+  const handleUpdateItem = (updatedItem) => {
+    // Implement update functionality here
+    console.log("Updated item:", updatedItem);
+    // Update itemList state accordingly
+  };
+
+  const handleRemoveItem = (itemId) => {
+    // Implement remove functionality here
+    console.log("Remove item with ID:", itemId);
+    // Update itemList state accordingly
+  };
+
   return (
     <>
       <div
@@ -31,9 +53,8 @@ function Product() {
           zIndex: "999",
         }}
       >
-        <AddItems/>
+        <AddItems />
       </div>
-      
 
       <div className="row border-bottom border-muted">
         <div className="col-lg-6 ms-5">
@@ -59,7 +80,7 @@ function Product() {
       <div className="row mt-3">
         <div className="col-lg-6">
           {itemList.slice(0, Math.ceil(itemList.length / 2)).map((item) => (
-            <tr key={item.id}>
+            <tr key={item.id} onClick={() => handleItemClick(item)}>
               <td>
                 <Item item={item} />
               </td>
@@ -68,7 +89,7 @@ function Product() {
         </div>
         <div className="col-lg-6">
           {itemList.slice(Math.ceil(itemList.length / 2)).map((item) => (
-            <tr key={item.id}>
+            <tr key={item.id} onClick={() => handleItemClick(item)}>
               <td>
                 <Item item={item} />
               </td>
@@ -76,8 +97,17 @@ function Product() {
           ))}
         </div>
       </div>
+
+      {selectedItem && (
+        <ItemDetails
+          item={selectedItem}
+          onUpdate={handleUpdateItem}
+          onRemove={handleRemoveItem}
+          onClose={handleCloseModal}
+        />
+      )}
     </>
   );
 }
 
-export default Product;
+export default ItemList;
