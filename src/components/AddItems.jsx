@@ -26,10 +26,13 @@ function AddItems() {
 
   return (
     <>
-    <Button className="m-2" variant="success" onClick={handleShow}>
-        Add Items
-      </Button>
-
+        <button
+          type="button"
+          className="btn btn-success rounded-pill border btn-lg ps-5  pe-5 pt-1 pb-1"
+          onClick={handleShow}
+        >
+          Add Item
+        </button>
       <Modal className='text-black' show={show} onHide={handleClose}>
         <Modal.Header closeButton>
         <Modal.Body className='mt-0 pt-0 mb-0 pb-0'><p className='h5 text-center'>Product Details</p></Modal.Body>
