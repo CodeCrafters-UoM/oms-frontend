@@ -24,8 +24,8 @@ function ItemDetails({ item, onUpdate, onRemove, onClose }) {
     try {
       // Make an HTTP DELETE request to delete the item
       await axios.delete(`http://localhost:8000/product/${item.productCode}`);
-      
-      // If the deletion is successful, close the modal and update the UI
+
+      onRemove(item.productCode); 
       onClose();
     } catch (error) {
       console.error("Error deleting item:", error);

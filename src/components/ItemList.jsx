@@ -45,16 +45,44 @@ function ItemList() {
   };
 
   const handleUpdateItem = (updatedItem) => {
-    // Implement update functionality here
-    console.log("Updated item:", updatedItem);
-    // Update itemList state accordingly
+    // Find the index of the updated item in itemList
+    const updatedIndex = itemList.findIndex(item => item.id === updatedItem.id);
+    
+    if (updatedIndex !== -1) {
+      // Update the itemList state by replacing the old item with the updated item
+      setItemList(prevItemList => {
+        const updatedList = [...prevItemList];
+        updatedList[updatedIndex] = updatedItem;
+        return updatedList;
+      });
+    }
+  
+    // Close the modal
+    handleCloseModal();
+  };
+  
+  const handleRemoveItem = (itemId) => {
+    // Filter out the item to be removed from the itemList
+    const updatedItemList = itemList.filter(item => item.id !== itemId);
+    
+    // Update the itemList state with the filtered list
+    setItemList(updatedItemList);
+    handleCloseModal();
   };
 
-  const handleRemoveItem = (itemId) => {
-    // Implement remove functionality here
-    console.log("Remove item with ID:", itemId);
-    // Update itemList state accordingly
+  const onRemove = (productCode) => {
+    // Find the index of the item to be removed in itemList
+    const itemIndexToRemove = itemList.findIndex(item => item.productCode === productCode);
+    
+    if (itemIndexToRemove !== -1) {
+      // Create a new array without the item to be removed
+      const updatedItemList = [...itemList.slice(0, itemIndexToRemove), ...itemList.slice(itemIndexToRemove + 1)];
+      
+      // Update the itemList state
+      setItemList(updatedItemList);
+    }
   };
+  
 
   const updateItemList = (newItemList) => {
     setItemList(newItemList);
@@ -118,11 +146,12 @@ function ItemList() {
 
       {selectedItem && (
         <ItemDetails
-          item={selectedItem}
-          onUpdate={handleUpdateItem}
-          onRemove={handleRemoveItem}
-          onClose={handleCloseModal}
-        />
+        item={selectedItem}
+        onUpdate={handleUpdateItem}
+        onRemove={onRemove}
+        onClose={handleCloseModal}
+      />
+      
       )}
     </>
   );
