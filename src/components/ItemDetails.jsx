@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 
 function ItemDetails({ item, onUpdate, onRemove, onClose }) {
   const [show, setShow] = useState(true);
@@ -19,11 +20,16 @@ function ItemDetails({ item, onUpdate, onRemove, onClose }) {
     handleClose();
   };
 
-  const handleRemove = () => {
-    // Implement remove functionality here
-    // You can pass the item ID back to the parent component using onRemove callback
-    onRemove(item.id);
-    handleClose();
+  const handleRemove = async () => {
+    try {
+      // Make an HTTP DELETE request to delete the item
+      await axios.delete(`http://localhost:8000/product/${item.productCode}`);
+      
+      // If the deletion is successful, close the modal and update the UI
+      onClose();
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
   };
 
   return (
