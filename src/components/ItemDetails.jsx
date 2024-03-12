@@ -8,21 +8,37 @@ import axios from "axios";
 function ItemDetails({ item, onUpdate, onRemove, onClose }) {
   const [show, setShow] = useState(true);
 
+  const [updatedItem, setUpdatedItem] = useState({ ...item }); // Initialize updatedItem state with item data
+
   const handleClose = () => {
     setShow(false);
     onClose();
   };
 
-  const handleUpdate = () => {
-    // Implement update functionality here
-    // You can pass the updated item back to the parent component using onUpdate callback
-    onUpdate(item);
-    handleClose();
+  const handleUpdate = async () => {
+    try {
+      await axios.put(`http://localhost:8000/product/${item.productCode}`, updatedItem);
+      
+      // If the update is successful, close the modal and trigger the onUpdate callback
+      onUpdate(updatedItem);
+      handleClose();
+    } catch (error) {
+      console.error("Error updating item:", error);
+    }
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const parsedValue = name === 'price' ? parseFloat(value) : value;
+    setUpdatedItem(prevItem => ({
+      ...prevItem,
+      [name]: parsedValue
+    }));
+  };
+
 
   const handleRemove = async () => {
     try {
-      // Make an HTTP DELETE request to delete the item
       await axios.delete(`http://localhost:8000/product/${item.productCode}`);
 
       onRemove(item.productCode); 
@@ -31,6 +47,7 @@ function ItemDetails({ item, onUpdate, onRemove, onClose }) {
       console.error("Error deleting item:", error);
     }
   };
+
 
   return (
     <>
@@ -53,8 +70,10 @@ function ItemDetails({ item, onUpdate, onRemove, onClose }) {
               <Form.Label>Product Name</Form.Label>
               <Form.Control
                 type="text"
-                readOnly
-                defaultValue={item.name}
+                name="name"
+                value={updatedItem.name} // Bind to updatedItem state
+                onChange={handleInputChange} // Handle input change
+                // defaultValue={item.name}
                 style={{ backgroundColor: "#f2f2f2" }} 
               />
             </Form.Group>
@@ -62,8 +81,10 @@ function ItemDetails({ item, onUpdate, onRemove, onClose }) {
               <Form.Label>Product Price</Form.Label>
               <Form.Control
                 type="text"
-                readOnly
-                defaultValue={item.price}
+                name="price"
+                value={updatedItem.price} // Bind to updatedItem state
+                onChange={handleInputChange} // Handle input change
+                // defaultValue={item.price}
                 style={{ backgroundColor: "#f2f2f2" }} 
               />
             </Form.Group>
@@ -71,9 +92,11 @@ function ItemDetails({ item, onUpdate, onRemove, onClose }) {
               <Form.Label>Product Description</Form.Label>
               <Form.Control
                 as="textarea"
-                readOnly
+                name="description"
+                value={updatedItem.description} // Bind to updatedItem state
+                onChange={handleInputChange} // Handle input change
                 rows={3}
-                defaultValue={item.description}
+                // defaultValue={item.description}
                 style={{ backgroundColor: "#f2f2f2" }} 
               />
             </Form.Group>
@@ -81,8 +104,10 @@ function ItemDetails({ item, onUpdate, onRemove, onClose }) {
               <Form.Label>Order Link</Form.Label>
               <Form.Control
                 type="text"
-                readOnly
-                defaultValue={item.orderLink}
+                name="orderLink"
+                value={updatedItem.orderLink} // Bind to updatedItem state
+                onChange={handleInputChange} // Handle input change
+                // defaultValue={item.orderLink}
                 style={{ backgroundColor: "#f2f2f2" }} 
               />
             </Form.Group>

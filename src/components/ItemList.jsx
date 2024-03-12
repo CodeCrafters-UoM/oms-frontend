@@ -9,18 +9,6 @@ function ItemList() {
   const [itemList, setItemList] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchItemList = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:8000/products");
-  //       setItemList(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching item list:", error);
-  //     }
-  //   };
-
-  //   fetchItemList();
-  // }, []);
   useEffect(() => {
     const fetchItemList = async () => {
       try {
@@ -45,27 +33,9 @@ function ItemList() {
   };
 
   const handleUpdateItem = (updatedItem) => {
-    // Find the index of the updated item in itemList
-    const updatedIndex = itemList.findIndex(item => item.id === updatedItem.id);
-    
-    if (updatedIndex !== -1) {
-      // Update the itemList state by replacing the old item with the updated item
-      setItemList(prevItemList => {
-        const updatedList = [...prevItemList];
-        updatedList[updatedIndex] = updatedItem;
-        return updatedList;
-      });
-    }
-  
-    // Close the modal
-    handleCloseModal();
-  };
-  
-  const handleRemoveItem = (itemId) => {
-    // Filter out the item to be removed from the itemList
-    const updatedItemList = itemList.filter(item => item.id !== itemId);
-    
-    // Update the itemList state with the filtered list
+    const updatedItemList = itemList.map((item) =>
+      item.id === updatedItem.id ? updatedItem : item
+    );
     setItemList(updatedItemList);
     handleCloseModal();
   };
@@ -77,8 +47,6 @@ function ItemList() {
     if (itemIndexToRemove !== -1) {
       // Create a new array without the item to be removed
       const updatedItemList = [...itemList.slice(0, itemIndexToRemove), ...itemList.slice(itemIndexToRemove + 1)];
-      
-      // Update the itemList state
       setItemList(updatedItemList);
     }
   };
