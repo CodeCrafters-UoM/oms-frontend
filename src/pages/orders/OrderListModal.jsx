@@ -10,10 +10,13 @@ import OrderListCusDetails from './OrderListCusDetails';
 
 const OrderListModal = ({ orderDetails, orders }) => {
 
-
+  const [showDetails, setShowDetails] = useState(false);
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleCloseDetails = () => setShowDetails(false);
+  const handleShowCusDetails = () =>setShowDetails(true);
+                                        
+  const handleClose = () =>setShow(false);
   const handleShow = () => setShow(true);
 
   const [checked, setChecked] = useState(false);
@@ -30,6 +33,7 @@ const OrderListModal = ({ orderDetails, orders }) => {
   const handleClick = () => {
     handleShow();
     handleFilter();
+    clickBoxShadow();
   }
 
   // filter one persion
@@ -45,6 +49,12 @@ const OrderListModal = ({ orderDetails, orders }) => {
     }
   };
 
+  const [showHover, setShowHover] = useState(false);
+
+  const clickBoxShadow = () => {
+    setShowHover(!showHover);
+  };
+
   return (
     // must be change value order unique name - orders.customerId
     <>
@@ -53,7 +63,7 @@ const OrderListModal = ({ orderDetails, orders }) => {
       <Modal
         size="lg"
         show={show}
-        onHide={() => setShow(false)}
+        onHide={handleClose}
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
       >
@@ -111,11 +121,15 @@ const OrderListModal = ({ orderDetails, orders }) => {
                 
                  {/* button */}
                 <div className="text-center mx-3 my-3">
-                  
-                    <OrderListCusDetails />
-
-
-                           
+                   <Button variant="success" onClick={handleShowCusDetails}>
+                          more details
+                   </Button>
+                    
+                    <OrderListCusDetails  showDetails={showDetails} handleShowCusDetails={handleShowCusDetails}
+                                          handleCloseDetails={handleCloseDetails}
+                                          setShow={setShow} show={show}
+                                          filteredRecord= {filteredRecord}/>
+                         
                 </div>
 
 
@@ -174,6 +188,7 @@ const OrderListModal = ({ orderDetails, orders }) => {
           </Row>
 
         </Container>
+       
       </Modal>
     </>
   )

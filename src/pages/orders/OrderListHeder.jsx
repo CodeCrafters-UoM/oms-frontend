@@ -3,12 +3,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { BsFunnelFill } from "react-icons/bs" ;
 
-const OrderListHeder = ({search,setSearch}) => {
+const OrderListHeder = ({search,setSearch,orderDetails}) => {
 
 const handleChange = (event) => {
     setSearch(event.target.value) ;
    }
+
+const cardLength = orderDetails.length ;
 
 return (
     <Row>
@@ -23,7 +26,7 @@ return (
        <Col xs={6} md={3}>
           <div className="d-flex justify-content-center order-3 order-lg-2">
               <div className='text-center'>
-                        ICON
+                  <h5> <BsFunnelFill />  All({cardLength}) </h5>
               </div>            
           </div>
        </Col>

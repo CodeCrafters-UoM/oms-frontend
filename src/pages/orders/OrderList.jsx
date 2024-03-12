@@ -49,7 +49,7 @@ const OrderList = () => {
       paymentDelivery: 'cash on delivery',
       unitAmount: '1500.00 LKR',
       totalAmount: '6000.00 LKR',
-      pastAllOrder: '10',
+      pastAllOrder: '15',
       PastMyOrder: '3',
       ReturnAllOrder: '2',
       ReturnMyOrder: '1'
@@ -174,7 +174,8 @@ const OrderList = () => {
 
       {/* Order header section */}
       <div className="mt-3">
-        <OrderListHeder search={search} setSearch={setSearch} />
+        <OrderListHeder search={search} setSearch={setSearch}
+                        orderDetails={orderDetails} />
       </div>
 
       <hr />
