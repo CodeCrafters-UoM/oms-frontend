@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 
-function AddItems() {
+function AddItems({ updateItemList }) {
     const [show, setShow] = useState(false);
     const [validated, setValidated] = useState(false);
     const [formData, setFormData] = useState({
@@ -15,26 +15,44 @@ function AddItems() {
         productDescription: '',
         orderLink: ''
     });
+    console.log(formData);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const handleSubmit = async (event) => {
-        const form = event.currentTarget;
         event.preventDefault();
+        const form = event.currentTarget;
+        
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
+            // const product={
+            //     productCode: formData.productCode,
+            //     name: formData.productName,
+            //     price: formData.productPrice,
+            //     description: formData.productDescription,
+            //     sellerId: "a698fbbc-8f29-4f03-9114-8e6b44fef047",
+            // }
+            const product={
+                productCode: formData.productCode,
+                name: formData.productName,
+                description: formData.productDescription,
+                price: parseFloat(formData.productPrice),
+                sellerId: "a698fbbc-8f29-4f03-9114-8e6b44fef047"
+            }
+    
             try {
-                const response = await axios.post('/product/get', formData);
-                console.log(response.data); // Assuming the backend responds with some message
-                handleClose(); // Close modal after successful submission
+
+                const response = await axios.post('http://localhost:8000/product/addProduct', product);
+                console.log(response.data); 
+                updateItemList((prevItemList) => [...prevItemList, response.data]);
+                handleClose(); 
             } catch (error) {
                 console.error('Error submitting form:', error);
-                // Handle error, maybe show a message to the user
             }
         }
-        setValidated(true);
+        setValidated(true); 
     };
 
     const handleChange = (event) => {

@@ -9,6 +9,18 @@ function ItemList() {
   const [itemList, setItemList] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
+  // useEffect(() => {
+  //   const fetchItemList = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:8000/products");
+  //       setItemList(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching item list:", error);
+  //     }
+  //   };
+
+  //   fetchItemList();
+  // }, []);
   useEffect(() => {
     const fetchItemList = async () => {
       try {
@@ -21,6 +33,8 @@ function ItemList() {
 
     fetchItemList();
   }, []);
+  
+
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -42,6 +56,10 @@ function ItemList() {
     // Update itemList state accordingly
   };
 
+  const updateItemList = (newItemList) => {
+    setItemList(newItemList);
+  };
+
   return (
     <>
       <div
@@ -53,7 +71,7 @@ function ItemList() {
           zIndex: "999",
         }}
       >
-        <AddItems />
+         <AddItems updateItemList={updateItemList} />
       </div>
 
       <div className="row border-bottom border-muted">
