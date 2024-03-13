@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import InputGroup from "react-bootstrap/InputGroup";
 import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
 
 function LoginForm() {
   const [validated, setValidated] = useState(false);
@@ -14,6 +15,7 @@ function LoginForm() {
     password: "",
   });
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -29,46 +31,24 @@ function LoginForm() {
         username: form.elements[0].value,
         password: form.elements[1].value,
       };
-      console.log(user);
       try {
         const res = await axios.post("http://localhost:8000/login", user);
-        console.log(res.status);
         if (res.status === 200) {
-          alert("User login Successfully");
+          toast.success("User login Successfully");
+          sessionStorage.setItem("user", JSON.stringify(res.data));
           navigate("/");
         } else {
-          alert("Login Failed");
+          toast.error("Login Failed");
         }
       } catch (error) {
         if (error.response.status === 401) {
-          // Unauthorized (Incorrect credentials)
-          alert("Incorrect username or password");
+          toast.error("Incorrect username or password");
         } else {
           console.error("An error occurred:", error);
         }
       }
-      // axios
-      //   .post("http://localhost:8000/login", user)
-      // .then((res) => {
-      //   console.log(res.status);
-      //   if (res.status === 200) {
-      //     alert("User login Successfully");
-      //     navigate("/");
-      //   } else {
-      //     alert("Login Failed");
-      //   }
-      // })
-      // .catch((error) => {
-      //   if (error.response.status === 401) {
-      //     // Unauthorized (Incorrect credentials)
-      //     alert("Incorrect username or password");
-      //   } else {
-      //     console.error("An error occurred:", error);
-      //   }
-      // });
     }
   };
-
   const togglePasswordVisibility = () => {
     setPasswordVisible((prev) => !prev);
   };
@@ -155,5 +135,4 @@ function LoginForm() {
     </Form>
   );
 }
-
 export default LoginForm;

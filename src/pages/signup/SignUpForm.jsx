@@ -8,6 +8,7 @@ import * as formik from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function SignUpForm() {
   const { Formik, Field, ErrorMessage } = formik;
@@ -38,7 +39,6 @@ function SignUpForm() {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleOnSubmit = (values, formikBag) => {
-    console.log(values);
     formikBag.setSubmitting(false);
     const seller = {
       name: values.name,
@@ -54,10 +54,10 @@ function SignUpForm() {
       .then((res) => {
         console.log(seller);
         if (res.status === 200) {
-          alert("Seller Registered Successfully");
+          toast.success("Seller Registered Successfully");
           navigate("/login");
         } else {
-          alert("Seller Registration Failed");
+          toast.error("Seller Registration Failed");
         }
       })
       .catch((error) => {
