@@ -79,12 +79,13 @@ function ItemList() {
             <div className="input-group-prepend">
               <input
                 type="text"
-                className="form-control bg-secondary"
+                className="form-control"
                 id="inlineFormInputGroupUsername2"
                 placeholder="Search"
+                style={{ backgroundColor: '#BABBBB' }}
               />
             </div>
-            <div className="input-group-text bg-secondary">
+            <div className="input-group-text" style={{ backgroundColor: '#BABBBB' }}>
               <FiSearch id="search-icon" />
             </div>
           </div>
