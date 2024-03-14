@@ -44,7 +44,7 @@ function LoginForm() {
         if (error.response.status === 401) {
           toast.error("Incorrect username or password");
         } else {
-          console.error("An error occurred:", error);
+          console.log("An error occurred:", error);
         }
       }
     }

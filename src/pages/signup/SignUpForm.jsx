@@ -52,16 +52,19 @@ function SignUpForm() {
     axios
       .post("http://localhost:8000/sellerregister", seller)
       .then((res) => {
-        console.log(seller);
+        console.log(res);
         if (res.status === 200) {
           toast.success("Seller Registered Successfully");
           navigate("/login");
-        } else {
-          toast.error("Seller Registration Failed");
         }
       })
       .catch((error) => {
-        console.error(error);
+        if (error.response.status === 400) {
+          toast.error("Username already exists");
+        }
+        if (error.response.status === 500) {
+          toast.error("Seller Registration Failed");
+        }
       });
   };
 
