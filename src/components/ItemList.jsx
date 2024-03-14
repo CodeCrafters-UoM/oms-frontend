@@ -1,182 +1,129 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { FiSearch } from "react-icons/fi";
+import Item from "../pages/products/Item";
+import AddItems from "./AddItems";
+import ItemDetails from "./ItemDetails";
 
+function ItemList() {
+  const [itemList, setItemList] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-function Product() {
-  return (
-    <>
-     <div style={{ position: 'fixed', left: '92%', transform: 'translate(-50%, -50%)', bottom: '20px', zIndex: '999' }}>
-        <button type="button" className="btn btn-success rounded-pill border btn-lg ps-5  pe-5 pt-1 pb-1">Add Item</button>
-      </div>
+  useEffect(() => {
+    const fetchItemList = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/products");
+        setItemList(response.data);
+      } catch (error) {
+        console.error("Error fetching item list:", error);
+      }
+    };
 
-    <div className="row border-bottom border-muted">
-
-        <div className="col-lg-6 ms-5">
-            <h6 className="display-6 fw-bold ms-5"> Product List</h6>
-        </div>
-    
-      <div className="col-lg-4 ">
-      <div className=" input-group ">
-        <div className="input-group-prepend">
-        <input type="text" class="form-control bg-secondary" id="inlineFormInputGroupUsername2" placeholder="Search"/>
-        </div>
-        <div className="input-group-text bg-secondary">
-        <FiSearch id="search-icon"/>
-        </div>
-      </div>
-      </div>
-     
-    </div>
-   
-    <div className="row ">
-        <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0' }}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material git 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-
+    fetchItemList();
+  }, []);
   
 
-    <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0'}}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material 
-        perfect for chilly days.
 
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-    </div>
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+  };
 
-   
+  const handleCloseModal = () => {
+    setSelectedItem(null);
+  };
 
-    <div className="row mt-2">
-        <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0' }}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material git 
-        perfect for chilly days.
+  const handleUpdateItem = (updatedItem) => {
+    const updatedItemList = itemList.map((item) =>
+      item.id === updatedItem.id ? updatedItem : item
+    );
+    setItemList(updatedItemList);
+    handleCloseModal();
+  };
 
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-
+  const onRemove = (productCode) => {
+    // Find the index of the item to be removed in itemList
+    const itemIndexToRemove = itemList.findIndex(item => item.productCode === productCode);
     
-    <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0'}}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material 
-        perfect for chilly days.
+    if (itemIndexToRemove !== -1) {
+      // Create a new array without the item to be removed
+      const updatedItemList = [...itemList.slice(0, itemIndexToRemove), ...itemList.slice(itemIndexToRemove + 1)];
+      setItemList(updatedItemList);
+    }
+  };
+  
 
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-    </div>
+  const updateItemList = (newItemList) => {
+    setItemList(newItemList);
+  };
 
-    <div className="row mt-2">
+  return (
+    <>
+      <div
+        style={{
+          position: "fixed",
+          left: "92%",
+          transform: "translate(-50%, -50%)",
+          bottom: "200px",
+          zIndex: "999",
+        }}
+      >
+         <AddItems updateItemList={updateItemList} />
+      </div>
+
+      <div className="row border-bottom border-muted">
+        <div className="col-lg-6 ms-5">
+          <h6 className="display-6 fw-bold ms-5"> Product List</h6>
+        </div>
+        <div className="col-lg-4 ">
+          <div className=" input-group ">
+            <div className="input-group-prepend">
+              <input
+                type="text"
+                className="form-control"
+                id="inlineFormInputGroupUsername2"
+                placeholder="Search"
+                style={{ backgroundColor: '#BABBBB' }}
+              />
+            </div>
+            <div className="input-group-text" style={{ backgroundColor: '#BABBBB' }}>
+              <FiSearch id="search-icon" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="row mt-3">
         <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0' }}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material git 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-
-    
-    <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0'}}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-    </div>
-
-    <div className="row mt-2">
+          {itemList.slice(0, Math.ceil(itemList.length / 2)).map((item) => (
+            <tr key={item.id} onClick={() => handleItemClick(item)}>
+              <td>
+                <Item item={item} />
+              </td>
+            </tr>
+          ))}
+        </div>
         <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0' }}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material git 
-        perfect for chilly days.
+          {itemList.slice(Math.ceil(itemList.length / 2)).map((item) => (
+            <tr key={item.id} onClick={() => handleItemClick(item)}>
+              <td>
+                <Item item={item} />
+              </td>
+            </tr>
+          ))}
+        </div>
+      </div>
 
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-
-    
-    <div className="col-lg-6">
-    <Card className="container-fluid col-lg-9 p-0" style={{ border:'none',borderBottom: '1px solid green',borderRadius: '0'}}>
-      <Card.Body>
-        <Card.Title>Cozy Cable Knit Sweater</Card.Title>
-        <Card.Text>
-        Code : F002{<br/>}Price : 1450.00 LKR
-        </Card.Text>
-        <Card.Text>
-        Keep warm and stylish with this cozy cable knit sweater, featuring a soft and comfortable material 
-        perfect for chilly days.
-
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-    </div>
-
-
+      {selectedItem && (
+        <ItemDetails
+        item={selectedItem}
+        onUpdate={handleUpdateItem}
+        onRemove={onRemove}
+        onClose={handleCloseModal}
+      />
+      
+      )}
     </>
-    
   );
 }
 
-export default Product
+export default ItemList;

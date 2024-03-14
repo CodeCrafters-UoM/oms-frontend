@@ -11,8 +11,8 @@ const Products = () => {
         <HeaderSection />
       </div>
       <div style={{ marginTop: "90px" }}>
-        <div className="row">
-          <ItemList />
+        <div className="row mb-5"> 
+          <ItemList/>
         </div>
       </div>
       <div className="row">
