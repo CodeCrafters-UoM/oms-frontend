@@ -68,7 +68,7 @@ function ItemList() {
               right: "5%",
               transform: "translate(-50%, -50%)",
               bottom: "180px",
-              zIndex: "999",
+              //zIndex: "999",
             }}
           >
             <AddItems updateItemList={updateItemList} />
