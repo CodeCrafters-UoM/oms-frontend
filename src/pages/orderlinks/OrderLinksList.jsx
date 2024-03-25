@@ -22,6 +22,16 @@ const OrderLinksList = () => {
       // Cleanup function if needed
     };
   }, []);
+  const handleDeleteOrderLink = async (id) => {
+    console.log("Deleting order link with id:", id);
+    try {
+      await axios.delete("http://localhost:8000/orderlinks/delete${id}");
+      // After successful deletion, update the orderLinks state
+      setOrderLinks(orderLinks.filter((link) => link.id !== id));
+    } catch (error) {
+      console.log("Error deleting order link:", error);
+    }
+  };
 
   return (
     <div>
@@ -39,7 +49,7 @@ const OrderLinksList = () => {
                   <FaCopy />
                 </div>
                 <div className="pe-2 ps-2">
-                  <FaTrash />
+                  <FaTrash onClick={() => handleDeleteOrderLink(link.id)} />
                 </div>
               </div>
             </div>
