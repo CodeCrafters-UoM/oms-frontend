@@ -4,10 +4,12 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
+import { useEffect } from "react";
 
 function AddItems({ updateItemList }) {
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
+
   const [formData, setFormData] = useState({
     productCode: "",
     productName: "",
@@ -17,7 +19,28 @@ function AddItems({ updateItemList }) {
   });
   console.log(formData);
 
-  const handleClose = () => setShow(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  useEffect(() => {
+    if (show) {
+      // Reset the form fields when modal is opened
+      setFormData({
+        productCode: "",
+        productName: "",
+        productPrice: "",
+        productDescription: "",
+        orderLink: "",
+      });
+      setValidated(false);
+      setErrorMessage(null);
+    }
+  }, [show]);
+
+   const handleClose = () => {
+    setShow(false);
+    setValidated(false); // Reset validated state
+    setErrorMessage(null); // Clear error message
+  };
   const handleShow = () => setShow(true);
 
   const handleSubmit = async (event) => {
@@ -26,14 +49,8 @@ function AddItems({ updateItemList }) {
 
     if (form.checkValidity() === false) {
       event.stopPropagation();
+      setErrorMessage("Please fill in all the details correctly.");
     } else {
-      // const product={
-      //     productCode: formData.productCode,
-      //     name: formData.productName,
-      //     price: formData.productPrice,
-      //     description: formData.productDescription,
-      //     sellerId: "a698fbbc-8f29-4f03-9114-8e6b44fef047",
-      // }
       const product = {
         productCode: formData.productCode,
         name: formData.productName,
