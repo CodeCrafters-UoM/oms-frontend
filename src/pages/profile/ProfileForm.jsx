@@ -9,7 +9,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 function ProfileForm() {
   return (
     <Form>
-      <Form.Group className="mb-2 mt-2">
+      <Form.Group className="mb-3 mt-2">
       <div className="text-center mb-3">
       <img src="OIP.jpeg" alt="Salesman" style={{ width: '100px', height: '100px', borderRadius: '50%'}} />
     </div>
