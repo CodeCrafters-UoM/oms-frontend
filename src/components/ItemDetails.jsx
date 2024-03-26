@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import {toast} from 'react-hot-toast';
 
 function ItemDetails({ item, onUpdate, onRemove, onClose }) {
   const [show, setShow] = useState(true);
 
-  const [updatedItem, setUpdatedItem] = useState({ ...item }); // Initialize updatedItem state with item data
+  const [updatedItem, setUpdatedItem] = useState({ ...item });
 
   const handleClose = () => {
     setShow(false);
@@ -18,12 +19,12 @@ function ItemDetails({ item, onUpdate, onRemove, onClose }) {
   const handleUpdate = async () => {
     try {
       await axios.put(`http://localhost:8000/product/${item.productCode}`, updatedItem);
-      
-      // If the update is successful, close the modal and trigger the onUpdate callback
       onUpdate(updatedItem);
       handleClose();
+      toast.success('Item updated successfully!');
     } catch (error) {
       console.error("Error updating item:", error);
+      toast.error('Error updating item!');
     }
   };
 
@@ -43,8 +44,10 @@ function ItemDetails({ item, onUpdate, onRemove, onClose }) {
 
       onRemove(item.productCode); 
       onClose();
+      toast.success('Item removed successfully!')
     } catch (error) {
       console.error("Error deleting item:", error);
+      toast.error('Error deleting item!')
     }
   };
 

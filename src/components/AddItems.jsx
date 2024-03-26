@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
+import {toast} from 'react-hot-toast';
 
 function AddItems({ updateItemList }) {
   const [show, setShow] = useState(false);
@@ -19,18 +20,9 @@ function AddItems({ updateItemList }) {
   console.log(formData);
 
   const [errorMessage, setErrorMessage] = useState(null);
-  const [itemAdded, setItemAdded] = useState(false);
-
-  useEffect(() => {
-    if (itemAdded) {
-      window.alert("Your item added successfully"); // Display alert when item added
-      setItemAdded(false); // Reset itemAdded state
-    }
-  }, [itemAdded]);
 
   useEffect(() => {
     if (show) {
-      // Reset the form fields when modal is opened
       setFormData({
         productCode: "",
         productName: "",
@@ -75,9 +67,10 @@ function AddItems({ updateItemList }) {
         console.log(response.data);
         updateItemList((prevItemList) => [...prevItemList, response.data]);
         handleClose();
-        setItemAdded(true);
+        toast.success('Item added successfully!');
       } catch (error) {
         console.error("Error submitting form:", error);
+        setErrorMessage("Error adding item. Please try again.");
       }
     }
     setValidated(true);
